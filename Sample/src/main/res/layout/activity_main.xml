@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="xyz.zimuju.nathanieldialog.sample.MainActivity">
+
+    <Button
+        android:id="@+id/normal_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp"
+        android:layout_marginTop="10.0dp"
+        android:gravity="center"
+        android:text="@string/open_normal_dialog"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/image_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dp"
+        android:layout_marginTop="10.0dp"
+        android:gravity="center"
+        android:text="@string/open_image_dialog"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/items_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="10.0dp"
+        android:gravity="center"
+        android:text="@string/open_items_dialog"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/popup_window_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="10.0dp"
+        android:gravity="center"
+        android:text="@string/open_popup_window_dialog"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/progress_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="10.0dp"
+        android:gravity="center"
+        android:text="@string/show_default"
+        android:textSize="20sp"/>
+
+</LinearLayout>

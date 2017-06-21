@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:background="@drawable/selector_dialog_bottom"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_textview_bottom_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:textColor="#484848"
+        android:textSize="16sp"
+        tools:text="测试"/>
+</LinearLayout>

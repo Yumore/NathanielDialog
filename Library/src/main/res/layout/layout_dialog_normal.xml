@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                tools:background="#4c000000">
+
+    <View
+        android:id="@+id/dialog_top_view"
+        android:layout_width="290dp"
+        android:layout_height="48dp"
+        android:layout_above="@+id/dialog_container_ll"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        tools:background="#55000000"
+        tools:visibility="visible"/>
+
+    <LinearLayout
+        android:id="@+id/dialog_container_ll"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_dialog_normal"
+        android:divider="@drawable/shape_linear_layout_vertical_split"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/dialog_title"
+            style="@style/dialogTextSpecial"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/shape_dialog_title"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="18sp"
+            tools:text="操作提示"/>
+
+
+        <LinearLayout
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_dialog_title"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialog_message"
+                style="@style/dialogTextNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:minHeight="75dp"
+                android:padding="18dp"
+                android:visibility="gone"
+                tools:text="这里是消息的内容"
+                tools:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/dialog_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="300dp"
+                android:minHeight="60dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <xyz.zimuju.nathanieldialog.library.ProgressLayout
+                android:id="@+id/dialog_spots_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/progress_margin"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dialog_bottom_view"
+        android:layout_width="290dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/dialog_container_ll"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        tools:background="#55000000"
+        tools:visibility="visible"/>
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="dialogTextNormal">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">#484848</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">1.0</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+
+    <style name="dialogTextSpecial">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">#339aff</item>
+        <item name="android:shadowDx">0.0</item>
+        <item name="android:shadowDy">0.65</item>
+        <item name="android:gravity">center</item>
+        <item name="android:shadowRadius">1.0</item>
+    </style>
+
+    <style name="NathanielDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="SpotsDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="DialogTitleText">Loading......</item>
+        <item name="DialogSpotCount">5</item>
+    </style>
+
+</resources>

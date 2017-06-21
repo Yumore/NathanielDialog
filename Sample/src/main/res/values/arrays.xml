@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="dialog_options">
+        <item>item01</item>
+        <item>item02</item>
+        <item>item03</item>
+        <item>item04</item>
+        <item>item05</item>
+        <item>item06</item>
+        <item>item07</item>
+        <item>item08</item>
+        <item>item09</item>
+        <item>item10</item>
+    </array>
+</resources>
