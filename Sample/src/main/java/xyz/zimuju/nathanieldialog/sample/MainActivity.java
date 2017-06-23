@@ -21,7 +21,7 @@ import xyz.zimuju.nathanieldialog.library.NathanielDialog;
  * @description MainActivity 演示
  * @author Nathaniel-nathanwriting@126.com
  * @time 17-2-20-下午1:43
- * @version v1.0.9
+ * @version v1.1.0
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -157,8 +157,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
-                                Toast.makeText(MainActivity.this, "输入完成", Toast.LENGTH_SHORT).show();
+                                String text = nathanielDialog.getEditText();
+                                Toast.makeText(MainActivity.this, "输入完成->" + text, Toast.LENGTH_SHORT).show();
                             }
                         })
                         .create();

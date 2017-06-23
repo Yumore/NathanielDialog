@@ -17,6 +17,12 @@
 ![带图标的列表Dialog](screenshot/icon-string-list.png)
 
 ![Progress Dialog](screenshot/loading-progress.png)
+## Version 1.1.0 ##
+    【新增】 1. setEditable(boolean editable) 
+                true ：带有EditText 的 Dialog
+                nathanielDialog.getEditText() 获取EditText 的内容
+            2. setHint(int resId)
+            3. setHint(CharSequence hint) 
 
 ## Version 1.0.9 ##
     【修改】 1. public Builder setContentView(View customView, boolean needClear)
