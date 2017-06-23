@@ -16,6 +16,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -35,6 +36,7 @@ import java.util.List;
  */
 public class NathanielDialog extends Dialog {
     private static AnimatorPlayer animatorPlayer;
+    private static Builder builder;
 
     public NathanielDialog(Context context) {
         super(context, R.style.NathanielDialog);
@@ -57,6 +59,10 @@ public class NathanielDialog extends Dialog {
             animatorPlayer.stop();
             animatorPlayer = null;
         }
+    }
+
+    public String getEditText() {
+        return builder.getEditText();
     }
 
     public static class Builder {
@@ -83,6 +89,8 @@ public class NathanielDialog extends Dialog {
         private boolean progressive;
         private int spotCount;
         private List<String> strings;
+        private boolean editable;
+        private CharSequence hint;
 
         // listener
         private NathanielDialog.OnClickListener positiveButtonClickListener;
@@ -101,6 +109,7 @@ public class NathanielDialog extends Dialog {
         private TextView neutralButton;
         private TextView negativeButton;
         private TextView dialogMessage;
+        private EditText dialogEditor;
         private LinearLayout dialogContent;
         private TextView dialogTitle;
         private TextView itemTextView;
@@ -121,6 +130,7 @@ public class NathanielDialog extends Dialog {
         private View customView;
 
         public Builder(Context context) {
+            builder = this;
             this.context = context;
         }
 
@@ -141,6 +151,21 @@ public class NathanielDialog extends Dialog {
 
         public Builder setMessage(int message) {
             this.message = context.getResources().getString(message);
+            return this;
+        }
+
+        public Builder setEditable(boolean editable) {
+            this.editable = editable;
+            return this;
+        }
+
+        public Builder setHint(int resId) {
+            this.resId = resId;
+            return this;
+        }
+
+        public Builder setHint(CharSequence hint) {
+            this.hint = hint;
             return this;
         }
 
@@ -284,6 +309,10 @@ public class NathanielDialog extends Dialog {
             return this;
         }
 
+        public String getEditText() {
+            return dialogEditor.getText().toString();
+        }
+
         public NathanielDialog create() {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -300,9 +329,11 @@ public class NathanielDialog extends Dialog {
 
             dialogMessage = (TextView) normalLayout.findViewById(R.id.dialog_message);
 
-            dialogContent = (LinearLayout) normalLayout.findViewById(R.id.dialog_content);
+            dialogEditor = (EditText) normalLayout.findViewById(R.id.dialog_editor);
 
             dialogImage = (ImageView) normalLayout.findViewById(R.id.dialog_image);
+
+            dialogContent = (LinearLayout) normalLayout.findViewById(R.id.dialog_content);
 
             progressLayout = (ProgressLayout) normalLayout.findViewById(R.id.dialog_spots_progress);
 
@@ -325,6 +356,18 @@ public class NathanielDialog extends Dialog {
             if (message != null) {
                 dialogMessage.setText(message);
                 dialogMessage.setVisibility(View.VISIBLE);
+            }
+
+            if (editable) {
+                if (resId != 0) {
+                    dialogEditor.setHint(context.getResources().getString(resId));
+                }
+
+                if (TextUtils.isEmpty(hint)) {
+                    dialogEditor.setHint(hint);
+                }
+                dialogEditor.setCursorVisible(true);
+                dialogEditor.setVisibility(View.VISIBLE);
             }
 
             // image
@@ -398,7 +441,7 @@ public class NathanielDialog extends Dialog {
                     itemTextView.setText(items[i]);
                     itemTextView.setTag(i);
                     dialogContent.addView(itemLayout);
-                    dialogContent.setBackgroundResource(R.drawable.bg_dialog_normal);
+                    dialogContent.setBackgroundResource(R.drawable.shape_dialog_normal);
                     if (onItemClickListener != null) {
                         final TextView finalTextView = itemTextView;
                         itemLayout.setOnClickListener(new View.OnClickListener() {
@@ -430,7 +473,7 @@ public class NathanielDialog extends Dialog {
                     itemTextView.setText(strings.get(i));
                     itemTextView.setTag(i);
                     dialogContent.addView(itemLayout);
-                    dialogContent.setBackgroundResource(R.drawable.bg_dialog_normal);
+                    dialogContent.setBackgroundResource(R.drawable.shape_dialog_normal);
                     if (onItemClickListener != null) {
                         final TextView finalTextView = itemTextView;
                         itemLayout.setOnClickListener(new View.OnClickListener() {
@@ -471,7 +514,7 @@ public class NathanielDialog extends Dialog {
                     itemTextView.setText(actionItemList.get(i).getTitle());
                     itemTextView.setTag(i);
                     dialogContent.addView(itemLayout);
-                    dialogContent.setBackgroundResource(R.drawable.bg_dialog_normal);
+                    dialogContent.setBackgroundResource(R.drawable.shape_dialog_normal);
                     if (onItemClickListener != null) {
                         final TextView finalTextView = itemTextView;
                         itemLayout.setOnClickListener(new View.OnClickListener() {

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:background="@drawable/bg_dialog_normal"
+        android:background="@drawable/shape_dialog_normal"
         android:divider="@drawable/shape_linear_layout_vertical_split"
         android:orientation="vertical"
         android:showDividers="middle">
@@ -58,6 +58,23 @@
                 android:padding="18dp"
                 android:visibility="gone"
                 tools:text="这里是消息的内容"
+                tools:visibility="visible"/>
+
+            <EditText
+                android:id="@+id/dialog_editor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_dialog_editor"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:hint="@string/dialog_editor_tip"
+                android:maxHeight="120dp"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:scrollbars="none"
+                android:textSize="14sp"
+                android:visibility="gone"
                 tools:visibility="visible"/>
 
             <ImageView

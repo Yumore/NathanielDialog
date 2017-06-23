@@ -3,52 +3,56 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:divider="@drawable/shape_linear_layout_vertical_split"
               android:orientation="vertical"
+              android:showDividers="middle"
               tools:context="xyz.zimuju.nathanieldialog.sample.MainActivity">
 
-    <Button
+    <TextView
         android:id="@+id/normal_dialog"
         android:layout_width="match_parent"
         android:layout_height="50.0dp"
-        android:layout_marginTop="10.0dp"
         android:gravity="center"
         android:text="@string/open_normal_dialog"
         android:textSize="20sp"/>
 
-    <Button
+    <TextView
         android:id="@+id/image_dialog"
         android:layout_width="match_parent"
         android:layout_height="50.0dp"
-        android:layout_marginTop="10.0dp"
         android:gravity="center"
         android:text="@string/open_image_dialog"
         android:textSize="20sp"/>
 
-    <Button
+    <TextView
         android:id="@+id/items_dialog"
         android:layout_width="match_parent"
         android:layout_height="50dip"
-        android:layout_marginTop="10.0dp"
         android:gravity="center"
         android:text="@string/open_items_dialog"
         android:textSize="20sp"/>
 
-    <Button
+    <TextView
         android:id="@+id/popup_window_dialog"
         android:layout_width="match_parent"
         android:layout_height="50dip"
-        android:layout_marginTop="10.0dp"
         android:gravity="center"
         android:text="@string/open_popup_window_dialog"
         android:textSize="20sp"/>
 
-    <Button
+    <TextView
         android:id="@+id/progress_dialog"
         android:layout_width="match_parent"
         android:layout_height="50dip"
-        android:layout_marginTop="10.0dp"
         android:gravity="center"
-        android:text="@string/show_default"
+        android:text="@string/show_progress_dialog"
         android:textSize="20sp"/>
 
+    <TextView
+        android:id="@+id/editor_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:gravity="center"
+        android:text="@string/show_editor_dialog"
+        android:textSize="20sp"/>
 </LinearLayout>

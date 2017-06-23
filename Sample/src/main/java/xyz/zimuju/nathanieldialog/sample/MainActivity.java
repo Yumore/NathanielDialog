@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,12 +25,13 @@ import xyz.zimuju.nathanieldialog.library.NathanielDialog;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button showNormalDialog;
-    private Button showImageDialog;
-    private Button showItemsDialog;
-    private Button showPopupWindowDialog;
-    private Button spotProgressDialog;
+    private TextView showNormalDialog;
+    private TextView showImageDialog;
+    private TextView showItemsDialog;
+    private TextView showPopupWindowDialog;
+    private TextView spotProgressDialog;
     private List<ActionItem> actions;
+    private TextView editorDialog;
     private NathanielDialog nathanielDialog;
 
     @Override
@@ -48,11 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initViews() {
-        showNormalDialog = (Button) findViewById(R.id.normal_dialog);
-        showImageDialog = (Button) findViewById(R.id.image_dialog);
-        showItemsDialog = (Button) findViewById(R.id.items_dialog);
-        showPopupWindowDialog = (Button) findViewById(R.id.popup_window_dialog);
-        spotProgressDialog = (Button) findViewById(R.id.progress_dialog);
+        showNormalDialog = (TextView) findViewById(R.id.normal_dialog);
+        showImageDialog = (TextView) findViewById(R.id.image_dialog);
+        showItemsDialog = (TextView) findViewById(R.id.items_dialog);
+        showPopupWindowDialog = (TextView) findViewById(R.id.popup_window_dialog);
+        spotProgressDialog = (TextView) findViewById(R.id.progress_dialog);
+        editorDialog = (TextView) findViewById(R.id.editor_dialog);
     }
 
     private void viewOptions() {
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showItemsDialog.setOnClickListener(this);
         showPopupWindowDialog.setOnClickListener(this);
         spotProgressDialog.setOnClickListener(this);
+        editorDialog.setOnClickListener(this);
     }
 
 
@@ -147,6 +150,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 nathanielDialog.show();
                 break;
 
+            case R.id.editor_dialog:
+                nathanielDialog = new NathanielDialog.Builder(this)
+                        .setEditable(true)
+                        .setHint("这是提示")
+                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Toast.makeText(MainActivity.this, "输入完成", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .create();
+                nathanielDialog.show();
+                break;
         }
     }
 }

@@ -6,8 +6,10 @@
     <string name="show_styled">Show styled dialog</string>
     <string name="show_message">Show custom message dialog</string>
     <string name="show_message_style">Show custom message AND style dialog</string>
-    <string name="open_popup_window_dialog">Open popup window dialog</string>
+    <string name="open_popup_window_dialog">Show popup window dialog</string>
     <string name="open_items_dialog">Open items dialog</string>
     <string name="open_image_dialog">Open image dialog</string>
     <string name="open_normal_dialog">Open normal dialog</string>
+    <string name="show_progress_dialog">Show progress dialog</string>
+    <string name="show_editor_dialog">Show editor dialog</string>
 </resources>
