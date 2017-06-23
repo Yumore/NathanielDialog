@@ -185,6 +185,11 @@ public class NathanielDialog extends Dialog {
         }
 
         // keep title show
+        public Builder setCustomView(View customView) {
+            this.customView = customView;
+            return this;
+        }
+
         public Builder setCustomView(View customView, boolean needClear) {
             this.needClear = needClear;
             this.customView = customView;
@@ -431,12 +436,12 @@ public class NathanielDialog extends Dialog {
                 }
                 for (int i = 0; i < items.length; i++) {
                     if (i == items.length - 1) {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_textview_bottom, null);
+                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
                         itemLayout.setLayoutParams(dialogTitle.getLayoutParams());
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_textview_bottom_tv);
+                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_bottom_tv);
                     } else {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_textview_center, null);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_textview_center_tv);
+                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
+                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_center_tv);
                     }
                     itemTextView.setText(items[i]);
                     itemTextView.setTag(i);
@@ -463,13 +468,13 @@ public class NathanielDialog extends Dialog {
                 }
                 for (int i = 0; i < strings.size(); i++) {
                     if (i == strings.size() - 1) {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_textview_bottom, null);
-                        itemLayout.setLayoutParams(dialogTitle.getLayoutParams());
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_textview_bottom_tv);
+                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
+                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_bottom_tv);
                     } else {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_textview_center, null);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_textview_center_tv);
+                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
+                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_center_tv);
                     }
+                    itemTextView.setVisibility(View.VISIBLE);
                     itemTextView.setText(strings.get(i));
                     itemTextView.setTag(i);
                     dialogContent.addView(itemLayout);
@@ -495,15 +500,17 @@ public class NathanielDialog extends Dialog {
                 }
                 for (int i = 0; i < actionItemList.size(); i++) {
                     if (i == actionItemList.size() - 1) {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_action_bottom, null);
-                        itemImageView = (ImageView) itemLayout.findViewById(R.id.dialog_action_bottom_iv);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_action_bottom_tv);
+                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
+                        itemImageView = (ImageView) itemLayout.findViewById(R.id.dialog_image_bottom_iv);
+                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_bottom_tv);
                     } else {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_action_center, null);
-                        itemImageView = (ImageView) itemLayout.findViewById(R.id.dialog_action_center_iv);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_action_center_tv);
+                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
+                        itemImageView = (ImageView) itemLayout.findViewById(R.id.dialog_image_center_iv);
+                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_center_tv);
                     }
 
+                    itemImageView.setVisibility(View.VISIBLE);
+                    itemTextView.setVisibility(View.VISIBLE);
                     if (actionItemList.get(i).getBitmap() != null) {
                         itemImageView.setImageBitmap(actionItemList.get(i).getBitmap());
                     }

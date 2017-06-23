@@ -21,6 +21,7 @@ public class ActionItem {
     private int resId;
     private Bitmap bitmap;
     private CharSequence title;
+    private boolean selectable;
 
     public ActionItem() {
     }
@@ -42,6 +43,14 @@ public class ActionItem {
     public ActionItem(CharSequence title, int resId) {
         this.title = title;
         this.resId = resId;
+    }
+
+    public boolean isSelectable() {
+        return selectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        this.selectable = selectable;
     }
 
     public int getResId() {
