@@ -27,7 +27,7 @@
             原来setContentView(View view, boolean neeadClear) 只清除title以外的view，新增是否清除所有
 
 ## Version 1.0.7 ##
-    【新增】Library 和 Sample
+    【新增】将代码分为 Library 和 Sample
     【优化】部分代码
     【新增】Progress显示
 
@@ -65,3 +65,11 @@
 
 ## Version 1.0.0
     和AlertDialog一样使用
+    new NathanielDialog.Builder(this)
+        .setTitle("Beautiful girl")
+        .setMessage("This is a butiful gril.")
+        .setPositiveButton("Ok", null)
+        .setNegativeButton("Cancel", null)
+        .setCancelable(true)
+        .create()
+        .show();
