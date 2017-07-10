@@ -1,3 +1,4 @@
+[![](https://jitpack.io/v/Yumore/NathanielDialog.svg)](https://jitpack.io/#Yumore/NathanielDialog)
 # 关于我 #
     本人是一只小菜鸟，这是本人持续更新的一个开源控件，从2016.04开始第一个版本。
     因在工作中使用AlertDialog时，因ROM和OS版本不同到时样式不统一，所以就动手写了这个自定义的Dialog。
