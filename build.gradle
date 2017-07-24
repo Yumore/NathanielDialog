@@ -13,7 +13,6 @@ allprojects {
     repositories {
         jcenter()
         maven { url 'http://maven.oschina.net/content/groups/public/' }
-        maven { url 'https://jitpack.io' }
     }
 }
 
