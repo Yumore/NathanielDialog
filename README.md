@@ -1,7 +1,7 @@
 [![](https://jitpack.io/v/Yumore/NathanielDialog.svg)](https://jitpack.io/#Yumore/NathanielDialog)
 # 关于我 #
     本人是一只小菜鸟，这是本人持续更新的一个开源控件，从2016.04开始第一个版本。
-    因在工作中使用AlertDialog时，因ROM和OS版本不同到时样式不统一，所以就动手写了这个自定义的Dialog。
+    因在工作中使用AlertDialog时，因ROM和OS版本不同导致样式不统一，所以就动手写了这个自定义的Dialog。
     因这些都是自己在工作中遇到的需要的功能，所以只是我需要的功能，不能满足所有的需求，如有需要，请自行添加。
     如果你在改代码之后，请发给我一份，谢谢。
     Email：nathanwriting@126.com
