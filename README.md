@@ -18,6 +18,10 @@
 ![带图标的列表Dialog](screenshot/icon-string-list.png)
 
 ![Progress Dialog](screenshot/loading-progress.png)
+
+## Version 1.1.1 ##
+    【修复】 设置自定义宽高失效的bug 
+
 ## Version 1.1.0 ##
     【新增】 1. setEditable(boolean editable) 
                 true ：带有EditText 的 Dialog
