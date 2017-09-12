@@ -641,7 +641,10 @@ public class NathanielDialog extends Dialog {
             }
 
             if (windowLayoutParams != null) {
-                dialogWindow.setAttributes(windowLayoutParams);
+                WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
+                layoutParams.width = windowLayoutParams.width;
+                layoutParams.height = windowLayoutParams.height;
+                dialogWindow.setAttributes(layoutParams);
             }
 
             nathanielDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
