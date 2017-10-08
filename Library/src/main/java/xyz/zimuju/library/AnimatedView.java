@@ -1,4 +1,4 @@
-package xyz.zimuju.nathanieldialog.library;
+package xyz.zimuju.library;
 
 import android.content.Context;
 import android.view.View;

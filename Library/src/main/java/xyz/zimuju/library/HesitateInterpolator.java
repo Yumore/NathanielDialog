@@ -1,4 +1,4 @@
-package xyz.zimuju.nathanieldialog.library;
+package xyz.zimuju.library;
 
 import android.view.animation.Interpolator;
 

@@ -87,7 +87,7 @@
                 android:visibility="gone"
                 tools:visibility="visible"/>
 
-            <xyz.zimuju.nathanieldialog.library.ProgressLayout
+            <xyz.zimuju.library.ProgressLayout
                 android:id="@+id/dialog_spots_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -6,7 +6,7 @@
               android:divider="@drawable/shape_linear_layout_vertical_split"
               android:orientation="vertical"
               android:showDividers="middle"
-              tools:context="xyz.zimuju.nathanieldialog.sample.MainActivity">
+              tools:context="xyz.zimuju.sample.MainActivity">
 
     <TextView
         android:id="@+id/normal_dialog"

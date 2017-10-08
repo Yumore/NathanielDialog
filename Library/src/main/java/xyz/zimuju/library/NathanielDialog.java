@@ -1,4 +1,4 @@
-package xyz.zimuju.nathanieldialog.library;
+package xyz.zimuju.library;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -52,6 +52,11 @@ public class NathanielDialog extends Dialog {
         setOnCancelListener(onCancelListener);
     }
 
+    private static int dip2px(Context context, int dipValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }
+
     public void stopProgress() {
         // clear focus
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
@@ -93,10 +98,10 @@ public class NathanielDialog extends Dialog {
         private CharSequence hint;
 
         // listener
-        private NathanielDialog.OnClickListener positiveButtonClickListener;
-        private NathanielDialog.OnClickListener negativeButtonClickListener;
-        private NathanielDialog.OnClickListener neutralButtonClickListener;
-        private NathanielDialog.OnClickListener onClickListener;
+        private OnClickListener positiveButtonClickListener;
+        private OnClickListener negativeButtonClickListener;
+        private OnClickListener neutralButtonClickListener;
+        private OnClickListener onClickListener;
         private OnItemClickListener onItemClickListener;
         private OnDismissListener onDismissListener;
         private AdapterView.OnItemSelectedListener onItemSelectedListener;
@@ -128,6 +133,7 @@ public class NathanielDialog extends Dialog {
         private ProgressLayout progressLayout;
         // custom view
         private View customView;
+        private int maxLines;
 
         public Builder(Context context) {
             builder = this;
@@ -318,6 +324,11 @@ public class NathanielDialog extends Dialog {
             return dialogEditor.getText().toString();
         }
 
+        public Builder setMaxLines(int maxLines) {
+            this.maxLines = maxLines;
+            return this;
+        }
+
         public NathanielDialog create() {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -372,6 +383,12 @@ public class NathanielDialog extends Dialog {
                     dialogEditor.setHint(hint);
                 }
                 dialogEditor.setCursorVisible(true);
+                if (maxLines > 0) {
+                    int defaultLineHeight = dip2px(context, 30);
+                    LayoutParams layoutParams = dialogEditor.getLayoutParams();
+                    layoutParams.height = maxLines * defaultLineHeight;
+                    dialogEditor.setLayoutParams(layoutParams);
+                }
                 dialogEditor.setVisibility(View.VISIBLE);
             }
 
@@ -641,10 +658,7 @@ public class NathanielDialog extends Dialog {
             }
 
             if (windowLayoutParams != null) {
-                WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
-                layoutParams.width = windowLayoutParams.width;
-                layoutParams.height = windowLayoutParams.height;
-                dialogWindow.setAttributes(layoutParams);
+                dialogWindow.setAttributes(windowLayoutParams);
             }
 
             nathanielDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {

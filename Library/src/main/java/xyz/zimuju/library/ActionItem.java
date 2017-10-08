@@ -1,4 +1,4 @@
-package xyz.zimuju.nathanieldialog.library;
+package xyz.zimuju.library;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

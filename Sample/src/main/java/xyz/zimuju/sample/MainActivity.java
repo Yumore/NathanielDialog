@@ -1,4 +1,4 @@
-package xyz.zimuju.nathanieldialog.sample;
+package xyz.zimuju.sample;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import xyz.zimuju.nathanieldialog.R;
-import xyz.zimuju.nathanieldialog.library.ActionItem;
-import xyz.zimuju.nathanieldialog.library.NathanielDialog;
+import xyz.zimuju.library.ActionItem;
+import xyz.zimuju.library.NathanielDialog;
 
 
 /*

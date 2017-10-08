@@ -1,4 +1,4 @@
-package xyz.zimuju.nathanieldialog.library;
+package xyz.zimuju.library;
 
 /*
  * @description DialogOffset 横向/纵向/透明度变化
