@@ -32,7 +32,7 @@ import java.util.List;
  * title的默认值为“操作提示”
  * author Nathaniel-nathanwriting@126.com
  * time 2016年3月30日-下午4:41:18
- * version v1.1.0
+ * version v1.1.2
  */
 public class NathanielDialog extends Dialog {
     private static AnimatorPlayer animatorPlayer;

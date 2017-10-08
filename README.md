@@ -19,8 +19,12 @@
 
 ![Progress Dialog](screenshot/loading-progress.png)
 
+## Version 1.1.2 ##
+    【新增】 Builder setMaxLines(int maxLines)
+        设置弹出EditText 的行数，EditText会随着行数变化高度
+
 ## Version 1.1.1 ##
-    【修复】 设置自定义宽高失效的bug 
+    【修复】 设置自定义宽高失效的bug 
 
 ## Version 1.1.0 ##
     【新增】 1. setEditable(boolean editable) 
