@@ -97,7 +97,6 @@ public class NathanielDialog extends Dialog {
         private boolean editable;
         private CharSequence hint;
 
-        // listener
         private OnClickListener positiveButtonClickListener;
         private OnClickListener negativeButtonClickListener;
         private OnClickListener neutralButtonClickListener;
@@ -108,7 +107,6 @@ public class NathanielDialog extends Dialog {
         private OnCancelListener onCancelListener;
         private OnKeyListener onKeyListener;
 
-        // view
         private TextView positiveButton;
         private LinearLayout dialogContainer;
         private TextView neutralButton;
@@ -131,7 +129,6 @@ public class NathanielDialog extends Dialog {
         private View bottomView;
         private View topView;
         private ProgressLayout progressLayout;
-        // custom view
         private View customView;
         private int maxLines;
 
@@ -190,7 +187,6 @@ public class NathanielDialog extends Dialog {
             return this;
         }
 
-        // keep title show
         public Builder setCustomView(View customView) {
             this.customView = customView;
             return this;
@@ -202,7 +198,6 @@ public class NathanielDialog extends Dialog {
             return this;
         }
 
-        // clear all view
         public Builder setCustomView(View customView, boolean needClear, boolean clearAll) {
             this.needClear = needClear;
             this.clearAll = clearAll;
@@ -339,19 +334,19 @@ public class NathanielDialog extends Dialog {
 
             nathanielDialog.addContentView(normalLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-            dialogContainer = (LinearLayout) normalLayout.findViewById(R.id.dialog_container_ll);
+            dialogContainer = normalLayout.findViewById(R.id.dialog_container_ll);
 
-            dialogTitle = (TextView) normalLayout.findViewById(R.id.dialog_title);
+            dialogTitle = normalLayout.findViewById(R.id.dialog_title);
 
-            dialogMessage = (TextView) normalLayout.findViewById(R.id.dialog_message);
+            dialogMessage = normalLayout.findViewById(R.id.dialog_message);
 
-            dialogEditor = (EditText) normalLayout.findViewById(R.id.dialog_editor);
+            dialogEditor = normalLayout.findViewById(R.id.dialog_editor);
 
-            dialogImage = (ImageView) normalLayout.findViewById(R.id.dialog_image);
+            dialogImage = normalLayout.findViewById(R.id.dialog_image);
 
-            dialogContent = (LinearLayout) normalLayout.findViewById(R.id.dialog_content);
+            dialogContent = normalLayout.findViewById(R.id.dialog_content);
 
-            progressLayout = (ProgressLayout) normalLayout.findViewById(R.id.dialog_spots_progress);
+            progressLayout = normalLayout.findViewById(R.id.dialog_spots_progress);
 
             bottomView = normalLayout.findViewById(R.id.dialog_bottom_view);
 
@@ -455,10 +450,10 @@ public class NathanielDialog extends Dialog {
                     if (i == items.length - 1) {
                         itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
                         itemLayout.setLayoutParams(dialogTitle.getLayoutParams());
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_bottom_tv);
+                        itemTextView = itemLayout.findViewById(R.id.dialog_text_bottom_tv);
                     } else {
                         itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_center_tv);
+                        itemTextView = itemLayout.findViewById(R.id.dialog_text_center_tv);
                     }
                     itemTextView.setText(items[i]);
                     itemTextView.setTag(i);
@@ -475,7 +470,6 @@ public class NathanielDialog extends Dialog {
                             }
                         });
                     }
-                    nathanielDialog.dismiss();
                 }
             }
 
@@ -486,10 +480,10 @@ public class NathanielDialog extends Dialog {
                 for (int i = 0; i < strings.size(); i++) {
                     if (i == strings.size() - 1) {
                         itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_bottom_tv);
+                        itemTextView = itemLayout.findViewById(R.id.dialog_text_bottom_tv);
                     } else {
                         itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_center_tv);
+                        itemTextView = itemLayout.findViewById(R.id.dialog_text_center_tv);
                     }
                     itemTextView.setVisibility(View.VISIBLE);
                     itemTextView.setText(strings.get(i));
@@ -507,7 +501,6 @@ public class NathanielDialog extends Dialog {
                             }
                         });
                     }
-                    nathanielDialog.dismiss();
                 }
             }
 
@@ -518,12 +511,12 @@ public class NathanielDialog extends Dialog {
                 for (int i = 0; i < actionItemList.size(); i++) {
                     if (i == actionItemList.size() - 1) {
                         itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
-                        itemImageView = (ImageView) itemLayout.findViewById(R.id.dialog_image_bottom_iv);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_bottom_tv);
+                        itemImageView = itemLayout.findViewById(R.id.dialog_image_bottom_iv);
+                        itemTextView = itemLayout.findViewById(R.id.dialog_text_bottom_tv);
                     } else {
                         itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
-                        itemImageView = (ImageView) itemLayout.findViewById(R.id.dialog_image_center_iv);
-                        itemTextView = (TextView) itemLayout.findViewById(R.id.dialog_text_center_tv);
+                        itemImageView = itemLayout.findViewById(R.id.dialog_image_center_iv);
+                        itemTextView = itemLayout.findViewById(R.id.dialog_text_center_tv);
                     }
 
                     itemImageView.setVisibility(View.VISIBLE);
@@ -550,7 +543,6 @@ public class NathanielDialog extends Dialog {
                             }
                         });
                     }
-                    nathanielDialog.dismiss();
                 }
             }
 
@@ -568,31 +560,35 @@ public class NathanielDialog extends Dialog {
             switch (type) {
                 case 1:
                     buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_one_button, null);
-                    positiveButton = (TextView) buttonLayout.findViewById(R.id.dialog_positive_btn);
+                    positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
                     positiveButton.setText(positiveButtonText);
                     break;
 
                 case 2:
                     buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_two_button, null);
-                    positiveButton = (TextView) buttonLayout.findViewById(R.id.dialog_positive_btn);
-                    negativeButton = (TextView) buttonLayout.findViewById(R.id.dialog_negative_btn);
+                    positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
+                    negativeButton = buttonLayout.findViewById(R.id.dialog_negative_btn);
                     positiveButton.setText(positiveButtonText);
                     negativeButton.setText(negativeButtonText);
                     break;
 
                 case 3:
                     buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_three_button, null);
-                    positiveButton = (TextView) buttonLayout.findViewById(R.id.dialog_positive_btn);
-                    negativeButton = (TextView) buttonLayout.findViewById(R.id.dialog_negative_btn);
-                    neutralButton = (TextView) buttonLayout.findViewById(R.id.dialog_neutral_btn);
+                    positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
+                    negativeButton = buttonLayout.findViewById(R.id.dialog_negative_btn);
+                    neutralButton = buttonLayout.findViewById(R.id.dialog_neutral_btn);
                     positiveButton.setText(positiveButtonText);
                     negativeButton.setText(negativeButtonText);
                     neutralButton.setText(neutralButtonText);
                     break;
+
+                default:
+                    throw new IllegalArgumentException("unsupported options");
             }
 
             if (positiveButton != null) {
                 positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View v) {
                         if (positiveButtonClickListener != null) {
                             positiveButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_POSITIVE);
@@ -604,6 +600,7 @@ public class NathanielDialog extends Dialog {
 
             if (negativeButton != null) {
                 negativeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View v) {
                         if (negativeButtonClickListener != null) {
                             negativeButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_NEGATIVE);
