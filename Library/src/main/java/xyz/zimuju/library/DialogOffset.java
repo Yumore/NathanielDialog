@@ -1,10 +1,12 @@
 package xyz.zimuju.library;
 
-/*
- * @description DialogOffset 横向/纵向/透明度变化
- * @author Nathaniel-nathanwriting@126.com
- * @time 17-2-20-下午1:42
+/**
+ * @author Nathaniel
  * @version v1.0.0
+ * @email nathanwriting@126.com
+ * @description DialogOffset
+ * 横向/纵向/透明度变化
+ * @time 17-2-20-下午1:42
  */
 public class DialogOffset {
     private int offsetX;

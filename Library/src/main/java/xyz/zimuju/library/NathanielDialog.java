@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,14 +24,14 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * description 自定义的Dialog
+ * @author Nathaniel-nathanwriting@126.com
+ * @version v1.1.2
+ * @description 自定义的Dialog
  * 所有的文字相关的都需要在外面传值进来
  * 如果没有设置Title则使用默认的
  * 并且所有的按钮都默认都调用了dialog.dismiss()
  * title的默认值为“操作提示”
- * author Nathaniel-nathanwriting@126.com
- * time 2016年3月30日-下午4:41:18
- * version v1.1.2
+ * @time 2016年3月30日-下午4:41:18
  */
 public class NathanielDialog extends Dialog {
     private static AnimatorPlayer animatorPlayer;
@@ -57,8 +56,10 @@ public class NathanielDialog extends Dialog {
         return (int) (dipValue * scale + 0.5f);
     }
 
+    /**
+     * stop progress and clear focus
+     */
     public void stopProgress() {
-        // clear focus
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         if (animatorPlayer != null) {
             animatorPlayer.stop();
@@ -74,7 +75,6 @@ public class NathanielDialog extends Dialog {
         private static final int DELAY = 150;
         private static final int DURATION = 1500;
 
-        // field
         private Context context;
         private CharSequence title;
         private CharSequence positiveButtonText;
@@ -100,10 +100,8 @@ public class NathanielDialog extends Dialog {
         private OnClickListener positiveButtonClickListener;
         private OnClickListener negativeButtonClickListener;
         private OnClickListener neutralButtonClickListener;
-        private OnClickListener onClickListener;
         private OnItemClickListener onItemClickListener;
         private OnDismissListener onDismissListener;
-        private AdapterView.OnItemSelectedListener onItemSelectedListener;
         private OnCancelListener onCancelListener;
         private OnKeyListener onKeyListener;
 
@@ -324,35 +322,26 @@ public class NathanielDialog extends Dialog {
             return this;
         }
 
+        /**
+         * initial all views and set value to widget
+         *
+         * @return
+         */
         public NathanielDialog create() {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
             nathanielDialog = new NathanielDialog(context, R.style.NathanielDialog);
-
-            // normal dialog
             normalLayout = (RelativeLayout) layoutInflater.inflate(R.layout.layout_dialog_normal, null);
-
             nathanielDialog.addContentView(normalLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
             dialogContainer = normalLayout.findViewById(R.id.dialog_container_ll);
-
             dialogTitle = normalLayout.findViewById(R.id.dialog_title);
-
             dialogMessage = normalLayout.findViewById(R.id.dialog_message);
-
             dialogEditor = normalLayout.findViewById(R.id.dialog_editor);
-
             dialogImage = normalLayout.findViewById(R.id.dialog_image);
-
             dialogContent = normalLayout.findViewById(R.id.dialog_content);
-
             progressLayout = normalLayout.findViewById(R.id.dialog_spots_progress);
-
             bottomView = normalLayout.findViewById(R.id.dialog_bottom_view);
-
             topView = normalLayout.findViewById(R.id.dialog_top_view);
 
-            // title
             if (title != null) {
                 dialogTitle.setText(title);
             } else {
@@ -363,7 +352,6 @@ public class NathanielDialog extends Dialog {
                 }
             }
 
-            // message
             if (message != null) {
                 dialogMessage.setText(message);
                 dialogMessage.setVisibility(View.VISIBLE);
@@ -378,6 +366,7 @@ public class NathanielDialog extends Dialog {
                     dialogEditor.setHint(hint);
                 }
                 dialogEditor.setCursorVisible(true);
+
                 if (maxLines > 0) {
                     int defaultLineHeight = dip2px(context, 30);
                     LayoutParams layoutParams = dialogEditor.getLayoutParams();
@@ -387,7 +376,6 @@ public class NathanielDialog extends Dialog {
                 dialogEditor.setVisibility(View.VISIBLE);
             }
 
-            // image
             if (resId > 0) {
                 dialogImage.setImageResource(resId);
                 dialogImage.setVisibility(View.VISIBLE);
@@ -403,16 +391,12 @@ public class NathanielDialog extends Dialog {
                 dialogImage.setVisibility(View.VISIBLE);
             }
 
-            // progress
             if (progressive) {
-                progressLayout.setVisibility(View.VISIBLE);
-
-                // spot count
                 if (spotCount <= 0) {
                     spotCount = progressLayout.getSpotsCount();
                 }
+                progressLayout.setVisibility(View.VISIBLE);
 
-                // initialized progress layout
                 animatedViews = new AnimatedView[spotCount];
                 int spotSize = context.getResources().getDimensionPixelSize(R.dimen.spot_size);
                 int progressWidth = context.getResources().getDimensionPixelSize(R.dimen.progress_width);
@@ -546,25 +530,25 @@ public class NathanielDialog extends Dialog {
                 }
             }
 
-            int type = 0;
+            int type = -1;
             if (!TextUtils.isEmpty(positiveButtonText)) {
-                type = 1;
+                type++;
                 if (!TextUtils.isEmpty(negativeButtonText)) {
-                    type = 2;
+                    type++;
                     if (!TextUtils.isEmpty(neutralButtonText)) {
-                        type = 3;
+                        type++;
                     }
                 }
             }
 
             switch (type) {
-                case 1:
+                case 0:
                     buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_one_button, null);
                     positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
                     positiveButton.setText(positiveButtonText);
                     break;
 
-                case 2:
+                case 1:
                     buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_two_button, null);
                     positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
                     negativeButton = buttonLayout.findViewById(R.id.dialog_negative_btn);
@@ -572,7 +556,7 @@ public class NathanielDialog extends Dialog {
                     negativeButton.setText(negativeButtonText);
                     break;
 
-                case 3:
+                case 2:
                     buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_three_button, null);
                     positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
                     negativeButton = buttonLayout.findViewById(R.id.dialog_negative_btn);
@@ -677,9 +661,7 @@ public class NathanielDialog extends Dialog {
                 dialogWindow.setAttributes(layoutParams);
             }
 
-            // custom view
             if (customView != null) {
-                // need clear title or not
                 if (needClear) {
                     if (clearAll) {
                         normalLayout.removeAllViews();
@@ -700,10 +682,22 @@ public class NathanielDialog extends Dialog {
         }
 
         public interface OnItemClickListener {
+            /**
+             * the item of item clicked
+             *
+             * @param index
+             */
             void onItemClick(int index);
         }
 
         public interface OnKeyListener {
+            /**
+             * back key pressed
+             * @param dialog
+             * @param keyCode
+             * @param event
+             * @return
+             */
             boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event);
         }
     }

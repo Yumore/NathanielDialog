@@ -2,12 +2,12 @@ package xyz.zimuju.library;
 
 import android.view.animation.Interpolator;
 
-/*
- * @description HesitateInterpolator
+/**
  * @author Nathaniel
+ * @version 1.0.0
+ * @description HesitateInterpolator
  * @email nathanwriting@126.com
  * @time 2017/4/16 0016 - 14:06
- * @version 1.0.0
  */
 public class HesitateInterpolator implements Interpolator {
 

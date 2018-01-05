@@ -3,12 +3,12 @@ package xyz.zimuju.library;
 import android.content.Context;
 import android.view.View;
 
-/*
- * @description AnimatedView
+/**
  * @author Nathaniel
+ * @version 1.0.0
+ * @description AnimatedView
  * @email nathanwriting@126.com
  * @time 2017/4/16 0016 - 14:05
- * @version 1.0.0
  */
 public class AnimatedView extends View {
 

@@ -4,12 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 
-/*
- * @description AnimatorPlayer
+/**
  * @author Nathaniel
+ * @version 1.0.0
+ * @description AnimatorPlayer
  * @email nathanwriting@126.com
  * @time 2017/4/16 0016 - 14:05
- * @version 1.0.0
  */
 public class AnimatorPlayer extends AnimatorListenerAdapter {
 
