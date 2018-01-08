@@ -22,8 +22,7 @@ android {
 }
 
 dependencies {
-    compile project(path: ':Library')
+    compile project(path: ':Dialog')
     compile 'com.android.support:multidex:1.0.2'
     compile 'com.android.support:appcompat-v7:26.0.0'
-
 }
