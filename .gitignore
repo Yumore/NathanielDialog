@@ -2,8 +2,9 @@ build/
 .idea/
 .gradle/
 *.iml
-*.properties
-
+local.properties
+gradle.properties
+Dialog/project.properties
 
 # Windows image file caches
 Thumbs.db
