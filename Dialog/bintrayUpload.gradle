@@ -113,7 +113,7 @@ bintray {
     key = bintrayApikey
     configurations = ['archives']
     pkg {
-        repo = "maven"
+        repo = "NathanielDialog"
         name = projectName
         websiteUrl = projectSiteUrl
         vcsUrl = projectGitUrl
