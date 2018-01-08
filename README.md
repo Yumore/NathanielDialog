@@ -20,7 +20,7 @@
 ![Progress Dialog](screenshot/loading-progress.png)
 
 ## 使用 ##
-compile 'com.yumore.dialog:Dialog:1.1.3'
+   compile 'com.yumore.dialog:Dialog:1.1.3'
 
 ## Version 1.1.2 ##
     【新增】 Builder setMaxLines(int maxLines)
