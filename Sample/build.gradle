@@ -22,6 +22,6 @@ android {
 
 dependencies {
      compile project(path: ':Dialog')
-    // compile 'com.yumore:Dialog:1.1.3'
+    // compile 'com.yumore.dialog:Dialog:1.1.3'
     compile 'com.android.support:appcompat-v7:26.1.0'
 }

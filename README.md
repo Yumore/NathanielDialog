@@ -5,7 +5,8 @@
     如果你在改代码之后，请发给我一份，谢谢。
     Email：nathanwriting@126.com
 
-# NathanielDialog说明
+# NathanielDialog说明 #
+[![](https://jitpack.io/v/Yumore/NathanielDialog.svg)](https://jitpack.io/#Yumore/NathanielDialog)
 
 ## 截图 ##
 ![普通Dialog](screenshot/normal.png)
@@ -19,7 +20,7 @@
 ![Progress Dialog](screenshot/loading-progress.png)
 
 ## 使用 ##
-compile 'com.yumore:Dialog:1.1.3'
+compile 'com.yumore.dialog:Dialog:1.1.3'
 
 ## Version 1.1.2 ##
     【新增】 Builder setMaxLines(int maxLines)
