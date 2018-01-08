@@ -18,6 +18,9 @@
 
 ![Progress Dialog](screenshot/loading-progress.png)
 
+## 使用 ##
+compile 'com.yumore:Dialog:1.1.3'
+
 ## Version 1.1.2 ##
     【新增】 Builder setMaxLines(int maxLines)
         设置弹出EditText 的行数，EditText会随着行数变化高度
