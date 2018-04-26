@@ -2,6 +2,7 @@ package xyz.zimuju.library;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,26 +16,33 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Nathaniel-nathanwriting@126.com
- * @version v1.1.2
- * @description 自定义的Dialog
+ * NathanielDialog
+ * 自定义的Dialog
  * 所有的文字相关的都需要在外面传值进来
  * 如果没有设置Title则使用默认的
  * 并且所有的按钮都默认都调用了dialog.dismiss()
  * title的默认值为“操作提示”
- * @time 2016年3月30日-下午4:41:18
+ *
+ * @author Nathaniel
+ * nathanwriting@126.com
+ * @version v1.1.2
+ * @date 2016年3月30日-下午4:41:18
  */
 public class NathanielDialog extends Dialog {
     private static AnimatorPlayer animatorPlayer;
+    @SuppressLint("StaticFieldLeak")
     private static Builder builder;
 
     public NathanielDialog(Context context) {
@@ -104,6 +112,7 @@ public class NathanielDialog extends Dialog {
         private OnDismissListener onDismissListener;
         private OnCancelListener onCancelListener;
         private OnKeyListener onKeyListener;
+        private OnMultiChoiceListener onMultiChoiceListener;
 
         private TextView positiveButton;
         private LinearLayout dialogContainer;
@@ -129,6 +138,10 @@ public class NathanielDialog extends Dialog {
         private ProgressLayout progressLayout;
         private View customView;
         private int maxLines;
+        private boolean multiEnable;
+        private LinearLayout multiChoiceView;
+        private ListView listView;
+        private List<ActionItem> actionItems = new ArrayList<>();
 
         public Builder(Context context) {
             builder = this;
@@ -212,6 +225,18 @@ public class NathanielDialog extends Dialog {
         public Builder setPositiveButton(String positiveButtonText, OnClickListener listener) {
             this.positiveButtonText = positiveButtonText;
             this.positiveButtonClickListener = listener;
+            return this;
+        }
+
+        public Builder setPositiveButton(int positiveButtonText, OnMultiChoiceListener listener) {
+            this.positiveButtonText = context.getResources().getString(positiveButtonText);
+            this.onMultiChoiceListener = listener;
+            return this;
+        }
+
+        public Builder setPositiveButton(String positiveButtonText, OnMultiChoiceListener listener) {
+            this.positiveButtonText = positiveButtonText;
+            this.onMultiChoiceListener = listener;
             return this;
         }
 
@@ -319,6 +344,11 @@ public class NathanielDialog extends Dialog {
 
         public Builder setMaxLines(int maxLines) {
             this.maxLines = maxLines;
+            return this;
+        }
+
+        public Builder setMultiEnable(boolean multiEnable) {
+            this.multiEnable = multiEnable;
             return this;
         }
 
@@ -492,40 +522,65 @@ public class NathanielDialog extends Dialog {
                 if (dialogContent != null) {
                     dialogContent.removeAllViews();
                 }
-                for (int i = 0; i < actionItemList.size(); i++) {
-                    if (i == actionItemList.size() - 1) {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
-                        itemImageView = itemLayout.findViewById(R.id.dialog_image_bottom_iv);
-                        itemTextView = itemLayout.findViewById(R.id.dialog_text_bottom_tv);
-                    } else {
-                        itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
-                        itemImageView = itemLayout.findViewById(R.id.dialog_image_center_iv);
-                        itemTextView = itemLayout.findViewById(R.id.dialog_text_center_tv);
-                    }
-
-                    itemImageView.setVisibility(View.VISIBLE);
-                    itemTextView.setVisibility(View.VISIBLE);
-                    if (actionItemList.get(i).getBitmap() != null) {
-                        itemImageView.setImageBitmap(actionItemList.get(i).getBitmap());
-                    }
-
-                    if (actionItemList.get(i).getResId() > 0) {
-                        itemImageView.setImageResource(actionItemList.get(i).getResId());
-                    }
-                    itemTextView.setText(actionItemList.get(i).getTitle());
-                    itemTextView.setTag(i);
-                    dialogContent.addView(itemLayout);
-                    dialogContent.setBackgroundResource(R.drawable.shape_dialog_normal);
-                    if (onItemClickListener != null) {
-                        final TextView finalTextView = itemTextView;
-                        itemLayout.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Integer index = (Integer) finalTextView.getTag();
-                                onItemClickListener.onItemClick(index);
-                                nathanielDialog.dismiss();
+                if (multiEnable) {
+                    multiChoiceView = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_list, null);
+                    listView = multiChoiceView.findViewById(R.id.dialog_list_view);
+                    final MultiChoiceAdapter multiChoiceAdapter = new MultiChoiceAdapter();
+                    multiChoiceAdapter.setActionItemList(actionItemList);
+                    listView.setAdapter(multiChoiceAdapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            ActionItem actionItem = multiChoiceAdapter.getActionItemList().get(position);
+                            actionItem.setSelectable(!actionItem.isSelectable());
+                            for (int i = 0; i < actionItems.size(); i++) {
+                                if (actionItem.isSelectable()) {
+                                    actionItems.add(actionItem);
+                                } else {
+                                    if (actionItems.contains(actionItem)) {
+                                        actionItems.remove(actionItem);
+                                    }
+                                }
                             }
-                        });
+                            multiChoiceAdapter.notifyDataSetChanged();
+                        }
+                    });
+                } else {
+                    for (int i = 0; i < actionItemList.size(); i++) {
+                        if (i == actionItemList.size() - 1) {
+                            itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_bottom, null);
+                            itemImageView = itemLayout.findViewById(R.id.dialog_image_bottom_iv);
+                            itemTextView = itemLayout.findViewById(R.id.dialog_text_bottom_tv);
+                        } else {
+                            itemLayout = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_center, null);
+                            itemImageView = itemLayout.findViewById(R.id.dialog_image_center_iv);
+                            itemTextView = itemLayout.findViewById(R.id.dialog_text_center_tv);
+                        }
+
+                        itemImageView.setVisibility(View.VISIBLE);
+                        itemTextView.setVisibility(View.VISIBLE);
+                        if (actionItemList.get(i).getBitmap() != null) {
+                            itemImageView.setImageBitmap(actionItemList.get(i).getBitmap());
+                        }
+
+                        if (actionItemList.get(i).getResId() > 0) {
+                            itemImageView.setImageResource(actionItemList.get(i).getResId());
+                        }
+                        itemTextView.setText(actionItemList.get(i).getTitle());
+                        itemTextView.setTag(i);
+                        dialogContent.addView(itemLayout);
+                        dialogContent.setBackgroundResource(R.drawable.shape_dialog_normal);
+                        if (onItemClickListener != null) {
+                            final TextView finalTextView = itemTextView;
+                            itemLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Integer index = (Integer) finalTextView.getTag();
+                                    onItemClickListener.onItemClick(index);
+                                    nathanielDialog.dismiss();
+                                }
+                            });
+                        }
                     }
                 }
             }
@@ -573,9 +628,15 @@ public class NathanielDialog extends Dialog {
             if (positiveButton != null) {
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        if (positiveButtonClickListener != null) {
-                            positiveButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_POSITIVE);
+                    public void onClick(View view) {
+                        if (multiEnable) {
+                            if (null != onMultiChoiceListener) {
+                                onMultiChoiceListener.onMultiChoice(actionItems);
+                            }
+                        } else {
+                            if (positiveButtonClickListener != null) {
+                                positiveButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_POSITIVE);
+                            }
                         }
                         nathanielDialog.dismiss();
                     }
@@ -690,9 +751,14 @@ public class NathanielDialog extends Dialog {
             void onItemClick(int index);
         }
 
+        public interface OnMultiChoiceListener {
+            void onMultiChoice(List<ActionItem> actionItemList);
+        }
+
         public interface OnKeyListener {
             /**
              * back key pressed
+             *
              * @param dialog
              * @param keyCode
              * @param event
