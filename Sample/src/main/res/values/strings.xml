@@ -12,4 +12,5 @@
     <string name="open_normal_dialog">Open normal dialog</string>
     <string name="show_progress_dialog">Show progress dialog</string>
     <string name="show_editor_dialog">Show editor dialog</string>
+    <string name="show_list_dialog">Show list dialog</string>
 </resources>

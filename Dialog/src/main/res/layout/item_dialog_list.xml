@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/dialog_multicgoise_image_iv"
+        android:id="@+id/dialog_multichoise_image_iv"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"

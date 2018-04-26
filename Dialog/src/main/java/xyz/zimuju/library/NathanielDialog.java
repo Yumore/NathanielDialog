@@ -140,7 +140,6 @@ public class NathanielDialog extends Dialog {
         private int maxLines;
         private boolean multiEnable;
         private LinearLayout multiChoiceView;
-        private ListView listView;
         private List<ActionItem> actionItems = new ArrayList<>();
 
         public Builder(Context context) {
@@ -285,6 +284,16 @@ public class NathanielDialog extends Dialog {
         public Builder setActions(List<ActionItem> actionItemList, OnItemClickListener onItemClickListener) {
             this.actionItemList = actionItemList;
             this.onItemClickListener = onItemClickListener;
+            return this;
+        }
+
+        public Builder setItems(int itemsId) {
+            this.items = context.getResources().getTextArray(itemsId);
+            return this;
+        }
+
+        public Builder setActions(List<ActionItem> actionItemList) {
+            this.actionItemList = actionItemList;
             return this;
         }
 
@@ -524,10 +533,12 @@ public class NathanielDialog extends Dialog {
                 }
                 if (multiEnable) {
                     multiChoiceView = (LinearLayout) layoutInflater.inflate(R.layout.item_dialog_list, null);
-                    listView = multiChoiceView.findViewById(R.id.dialog_list_view);
+                    ListView listView = multiChoiceView.findViewById(R.id.dialog_list_view);
                     final MultiChoiceAdapter multiChoiceAdapter = new MultiChoiceAdapter();
                     multiChoiceAdapter.setActionItemList(actionItemList);
                     listView.setAdapter(multiChoiceAdapter);
+                    dialogContent.addView(multiChoiceView);
+                    dialogContent.setBackgroundResource(R.drawable.shape_dialog_normal);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

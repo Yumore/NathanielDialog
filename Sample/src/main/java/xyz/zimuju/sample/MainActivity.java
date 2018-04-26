@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView spotProgressDialog;
     private List<ActionItem> actions;
     private TextView editorDialog;
+    private TextView listDialog;
     private NathanielDialog nathanielDialog;
 
     @Override
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showPopupWindowDialog = findViewById(R.id.popup_window_dialog);
         spotProgressDialog = findViewById(R.id.progress_dialog);
         editorDialog = findViewById(R.id.editor_dialog);
+        listDialog = findViewById(R.id.list_dialog);
     }
 
     private void viewOptions() {
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showPopupWindowDialog.setOnClickListener(this);
         spotProgressDialog.setOnClickListener(this);
         editorDialog.setOnClickListener(this);
+        listDialog.setOnClickListener(this);
     }
 
 
@@ -163,6 +166,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(MainActivity.this, "输入完成->" + text, Toast.LENGTH_SHORT).show();
                             }
                         })
+                        .setNegativeButton("取消", null)
+                        .create();
+                nathanielDialog.show();
+                break;
+
+            case R.id.list_dialog:
+                nathanielDialog = new NathanielDialog.Builder(this)
+                        .setEditable(true)
+                        .setHint("这是提示")
+                        .setMultiEnable(true)
+                        .setActions(actions)
+                        .setPositiveButton("确认", new NathanielDialog.Builder.OnMultiChoiceListener() {
+                            @Override
+                            public void onMultiChoice(List<ActionItem> actionItemList) {
+                                Toast.makeText(MainActivity.this, "selected items' size is " + actionItemList.size(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("取消", null)
                         .create();
                 nathanielDialog.show();
                 break;

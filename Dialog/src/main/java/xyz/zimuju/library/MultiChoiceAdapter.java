@@ -42,15 +42,27 @@ public class MultiChoiceAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        ActionItem actionItem = actionItemList.get(position);
         if (null == convertView) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dialog_list, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.imageView = convertView.findViewById(R.id.dialog_multichoise_image_iv);
+            viewHolder.textView = convertView.findViewById(R.id.dialog_multichoise_text_tv);
+            viewHolder.checkBox = convertView.findViewById(R.id.dialog_multichoise_check_cb);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder.imageView.setImageResource(R.drawable.shape_dialog_spot);
+            viewHolder.textView.setText(actionItem.getTitle());
+            viewHolder.checkBox.setChecked(actionItem.isSelectable());
         }
         return convertView;
     }
 
     class ViewHolder {
-        private ImageView imageView;
-        private TextView textView;
-        private CheckBox checkBox;
+        ImageView imageView;
+        TextView textView;
+        CheckBox checkBox;
     }
 }
