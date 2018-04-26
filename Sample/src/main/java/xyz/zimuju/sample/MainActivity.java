@@ -12,16 +12,18 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import xyz.zimuju.nathanieldialog.R;
 import xyz.zimuju.library.ActionItem;
 import xyz.zimuju.library.NathanielDialog;
 
 
-/*
- * @description MainActivity 演示
- * @author Nathaniel-nathanwriting@126.com
- * @time 17-2-20-下午1:43
+/**
+ * MainActivity
+ * 演示
+ *
+ * @author Nathaniel
+ * nathanwriting@126.com
  * @version v1.1.0
+ * @date 17-2-20-下午1:43
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,12 +51,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initViews() {
-        showNormalDialog = (TextView) findViewById(R.id.normal_dialog);
-        showImageDialog = (TextView) findViewById(R.id.image_dialog);
-        showItemsDialog = (TextView) findViewById(R.id.items_dialog);
-        showPopupWindowDialog = (TextView) findViewById(R.id.popup_window_dialog);
-        spotProgressDialog = (TextView) findViewById(R.id.progress_dialog);
-        editorDialog = (TextView) findViewById(R.id.editor_dialog);
+        showNormalDialog = findViewById(R.id.normal_dialog);
+        showImageDialog = findViewById(R.id.image_dialog);
+        showItemsDialog = findViewById(R.id.items_dialog);
+        showPopupWindowDialog = findViewById(R.id.popup_window_dialog);
+        spotProgressDialog = findViewById(R.id.progress_dialog);
+        editorDialog = findViewById(R.id.editor_dialog);
     }
 
     private void viewOptions() {
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 nathanielDialog = new NathanielDialog.Builder(this)
                         .setTitle("Title test here")
                         .setMessage("Message test here")
-                        .setPositiveButton("Ok", null)
+                        .setPositiveButton("Ok", (DialogInterface.OnClickListener) null)
                         .setNegativeButton("Cancel", null)
                         .setNeutralButton("Neutral", null)
                         .setCancelable(true)
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 nathanielDialog = new NathanielDialog.Builder(this)
                         .setTitle("Beautiful girl")
                         .setImage(R.mipmap.girl)
-                        .setPositiveButton("Ok", null)
+                        .setPositiveButton("Ok", (DialogInterface.OnClickListener) null)
                         .setNegativeButton("Cancel", null)
                         .setGravity(Gravity.BOTTOM)
                         .setCancelable(true)
@@ -139,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setOnKeyListener(new NathanielDialog.Builder.OnKeyListener() {
                             @Override
                             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                                if(keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount()==0) {
+                                if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
                                     nathanielDialog.stopProgress();
                                     dialog.dismiss();
                                 }
@@ -163,6 +165,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         })
                         .create();
                 nathanielDialog.show();
+                break;
+
+            default:
                 break;
         }
     }
