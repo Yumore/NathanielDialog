@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 nathanielDialog = new NathanielDialog.Builder(this)
                         .setTitle("Title test here")
                         .setMessage("Message test here")
-                        .setPositiveButton("Ok", (DialogInterface.OnClickListener) null)
+                        .setPositiveButton("Ok", null)
                         .setNegativeButton("Cancel", null)
                         .setNeutralButton("Neutral", null)
                         .setCancelable(true)
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 nathanielDialog = new NathanielDialog.Builder(this)
                         .setTitle("Beautiful girl")
                         .setImage(R.mipmap.girl)
-                        .setPositiveButton("Ok", (DialogInterface.OnClickListener) null)
+                        .setPositiveButton("Ok", null)
                         .setNegativeButton("Cancel", null)
                         .setGravity(Gravity.BOTTOM)
                         .setCancelable(true)
@@ -177,10 +177,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setHint("这是提示")
                         .setMultiEnable(true)
                         .setActions(actions)
-                        .setPositiveButton("确认", new NathanielDialog.Builder.OnMultiChoiceListener() {
+                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onMultiChoice(List<ActionItem> actionItemList) {
-                                Toast.makeText(MainActivity.this, "selected items' size is " + actionItemList.size(), Toast.LENGTH_SHORT).show();
+                            public void onClick(DialogInterface dialog, int which) {
+
                             }
                         })
                         .setNegativeButton("取消", null)
