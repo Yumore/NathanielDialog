@@ -9,18 +9,9 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.view.*;
 import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.List;
 
@@ -76,7 +67,7 @@ public class NathanielDialog extends Dialog {
         return builder.getEditText();
     }
 
-    public static class Builder {
+    public static class Builder implements View.OnClickListener, OnKeyListener {
         private static final int DELAY = 150;
         private static final int DURATION = 1500;
 
@@ -110,6 +101,7 @@ public class NathanielDialog extends Dialog {
         private OnCancelListener onCancelListener;
         private OnKeyListener onKeyListener;
         private OnMultiChoiceClickListener onMultiChoiceClickListener;
+        private OnPositiveClickListener onPositiveClickListener;
 
         private TextView positiveButton;
         private LinearLayout dialogContainer;
@@ -353,6 +345,11 @@ public class NathanielDialog extends Dialog {
             return this;
         }
 
+        public Builder setOnPositiveClickListener(OnPositiveClickListener onPositiveClickListener) {
+            this.onPositiveClickListener = onPositiveClickListener;
+            return this;
+        }
+
         /**
          * initial all views and set value to widget
          *
@@ -432,12 +429,12 @@ public class NathanielDialog extends Dialog {
                 int spotSize = context.getResources().getDimensionPixelSize(R.dimen.spot_size);
                 int progressWidth = context.getResources().getDimensionPixelSize(R.dimen.progress_width);
                 for (int i = 0; i < animatedViews.length; i++) {
-                    AnimatedView v = new AnimatedView(context);
-                    v.setBackgroundResource(R.drawable.shape_dialog_spot);
-                    v.setTarget(progressWidth);
-                    v.setXFactor(-1f);
-                    progressLayout.addView(v, spotSize, spotSize);
-                    animatedViews[i] = v;
+                    AnimatedView animatedView = new AnimatedView(context);
+                    animatedView.setBackgroundResource(R.drawable.shape_dialog_spot);
+                    animatedView.setTarget(progressWidth);
+                    animatedView.setXFactor(-1f);
+                    progressLayout.addView(animatedView, spotSize, spotSize);
+                    animatedViews[i] = animatedView;
                 }
 
                 Animator[] animators = new Animator[spotCount];
@@ -561,83 +558,28 @@ public class NathanielDialog extends Dialog {
                 }
             }
 
-            int type = -1;
+            buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_button, null);
             if (!TextUtils.isEmpty(positiveButtonText)) {
-                type++;
-                if (!TextUtils.isEmpty(negativeButtonText)) {
-                    type++;
-                    if (!TextUtils.isEmpty(neutralButtonText)) {
-                        type++;
-                    }
-                }
+                positiveButton.setTag(Dialog.BUTTON_POSITIVE);
+                positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
+                positiveButton.setText(positiveButtonText);
+                positiveButton.setVisibility(View.VISIBLE);
+                positiveButton.setOnClickListener(this);
             }
-
-            switch (type) {
-                case 0:
-                    buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_one_button, null);
-                    positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
-                    positiveButton.setText(positiveButtonText);
-                    break;
-
-                case 1:
-                    buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_two_button, null);
-                    positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
-                    negativeButton = buttonLayout.findViewById(R.id.dialog_negative_btn);
-                    positiveButton.setText(positiveButtonText);
-                    negativeButton.setText(negativeButtonText);
-                    break;
-
-                case 2:
-                    buttonLayout = (LinearLayout) layoutInflater.inflate(R.layout.layout_dialog_three_button, null);
-                    positiveButton = buttonLayout.findViewById(R.id.dialog_positive_btn);
-                    negativeButton = buttonLayout.findViewById(R.id.dialog_negative_btn);
-                    neutralButton = buttonLayout.findViewById(R.id.dialog_neutral_btn);
-                    positiveButton.setText(positiveButtonText);
-                    negativeButton.setText(negativeButtonText);
-                    neutralButton.setText(neutralButtonText);
-                    break;
-
-                default:
-                    throw new IllegalArgumentException("unsupported options");
+            if (!TextUtils.isEmpty(negativeButtonText)) {
+                negativeButton = buttonLayout.findViewById(R.id.dialog_negative_btn);
+                negativeButton.setTag(Dialog.BUTTON_NEGATIVE);
+                negativeButton.setText(negativeButtonText);
+                negativeButton.setVisibility(View.VISIBLE);
+                negativeButton.setOnClickListener(this);
             }
-
-            if (positiveButton != null) {
-                positiveButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (positiveButtonClickListener != null) {
-                            positiveButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_POSITIVE);
-                        }
-                        nathanielDialog.dismiss();
-                    }
-                });
+            if (!TextUtils.isEmpty(neutralButtonText)) {
+                neutralButton = buttonLayout.findViewById(R.id.dialog_neutral_btn);
+                neutralButton.setTag(Dialog.BUTTON_NEUTRAL);
+                neutralButton.setText(neutralButtonText);
+                neutralButton.setVisibility(View.VISIBLE);
+                neutralButton.setOnClickListener(this);
             }
-
-            if (negativeButton != null) {
-                negativeButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (negativeButtonClickListener != null) {
-                            negativeButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_NEGATIVE);
-                        }
-                        nathanielDialog.dismiss();
-                    }
-                });
-            }
-
-            if (neutralButton != null) {
-                neutralButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (negativeButtonClickListener != null) {
-                            neutralButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_NEUTRAL);
-                        }
-                        nathanielDialog.dismiss();
-                    }
-                });
-            }
-
-            dialogContent.setBackgroundResource(type > 0 ? R.drawable.shape_dialog_center : R.drawable.shape_dialog_bottom);
 
             if (buttonLayout != null) {
                 buttonLayout.setLayoutParams(dialogTitle.getLayoutParams());
@@ -647,11 +589,8 @@ public class NathanielDialog extends Dialog {
             dialogWindow = nathanielDialog.getWindow();
 
             nathanielDialog.setCancelable(cancelable);
-
             nathanielDialog.setCanceledOnTouchOutside(cancelable);
-
             nathanielDialog.setOnCancelListener(onCancelListener);
-
             nathanielDialog.setOnDismissListener(onDismissListener);
 
             if (gravity != 0) {
@@ -673,16 +612,7 @@ public class NathanielDialog extends Dialog {
                 dialogWindow.setAttributes(windowLayoutParams);
             }
 
-            nathanielDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-                @Override
-                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                    boolean flag = false;
-                    if (onKeyListener != null) {
-                        flag = onKeyListener.onKey(dialog, keyCode, event);
-                    }
-                    return flag;
-                }
-            });
+            nathanielDialog.setOnKeyListener(this);
 
             if (dialogOffset != null) {
                 WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
@@ -706,10 +636,38 @@ public class NathanielDialog extends Dialog {
                     dialogContent.addView(customView);
                 }
             }
-
             nathanielDialog.setContentView(normalLayout);
-
             return nathanielDialog;
+        }
+
+        @Override
+        public void onClick(View view) {
+            int tag = (int) view.getTag();
+            switch (tag) {
+                case Dialog.BUTTON_POSITIVE:
+                    if (editable && onPositiveClickListener != null) {
+                        onPositiveClickListener.onPositive(nathanielDialog, DialogInterface.BUTTON_POSITIVE, dialogEditor.getText());
+                    }
+                    if (positiveButtonClickListener != null) {
+                        positiveButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_POSITIVE);
+                    }
+
+                default:
+                    if (positiveButtonClickListener != null) {
+                        positiveButtonClickListener.onClick(nathanielDialog, DialogInterface.BUTTON_POSITIVE);
+                    }
+                    break;
+            }
+            nathanielDialog.dismiss();
+        }
+
+        @Override
+        public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+            boolean flag = false;
+            if (onKeyListener != null) {
+                flag = onKeyListener.onKey(dialog, keyCode, event);
+            }
+            return flag;
         }
 
         public interface OnItemClickListener {
@@ -721,6 +679,10 @@ public class NathanielDialog extends Dialog {
             void onItemClick(int index);
         }
 
+
+        public interface OnPositiveClickListener {
+            void onPositive(DialogInterface dialogInterface, int witch, CharSequence result);
+        }
 
         public interface OnKeyListener {
             /**

@@ -3,10 +3,7 @@ package xyz.zimuju.library;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ import java.util.List;
  */
 public class MultiChoiceAdapter extends BaseAdapter {
     private List<ActionItem> actionItemList;
+    private boolean multiEnable;
 
     public List<ActionItem> getActionItemList() {
         return actionItemList;
@@ -23,6 +21,10 @@ public class MultiChoiceAdapter extends BaseAdapter {
 
     public void setActionItemList(List<ActionItem> actionItemList) {
         this.actionItemList = actionItemList;
+    }
+
+    public boolean isMultiEnable() {
+        return multiEnable;
     }
 
     @Override
@@ -47,20 +49,33 @@ public class MultiChoiceAdapter extends BaseAdapter {
         if (null == convertView) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dialog_list, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.linearLayout = convertView.findViewById(R.id.dialog_multichoise_root_layout);
             viewHolder.imageView = convertView.findViewById(R.id.dialog_multichoise_image_iv);
             viewHolder.textView = convertView.findViewById(R.id.dialog_multichoise_text_tv);
             viewHolder.checkBox = convertView.findViewById(R.id.dialog_multichoise_check_cb);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            viewHolder.imageView.setImageResource(R.drawable.shape_dialog_spot);
+            if (actionItem.getResId() > 0) {
+                viewHolder.imageView.setImageResource(R.drawable.shape_dialog_spot);
+                viewHolder.imageView.setVisibility(View.VISIBLE);
+            }
+            if (actionItem.getBitmap() != null) {
+                viewHolder.imageView.setImageBitmap(actionItem.getBitmap());
+                viewHolder.imageView.setVisibility(View.VISIBLE);
+            }
             viewHolder.textView.setText(actionItem.getTitle());
-            viewHolder.checkBox.setChecked(actionItem.isSelectable());
+            if (multiEnable) {
+                viewHolder.checkBox.setChecked(actionItem.isSelectable());
+                viewHolder.checkBox.setVisibility(View.VISIBLE);
+            }
+            viewHolder.linearLayout.setBackgroundResource(position == actionItemList.size() - 1 ? R.drawable.selector_dialog_bottom : R.drawable.selector_dialog_center);
         }
         return convertView;
     }
 
     class ViewHolder {
+        LinearLayout linearLayout;
         ImageView imageView;
         TextView textView;
         CheckBox checkBox;

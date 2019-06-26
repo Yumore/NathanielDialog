@@ -8,12 +8,11 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import xyz.zimuju.library.ActionItem;
+import xyz.zimuju.library.NathanielDialog;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import xyz.zimuju.library.ActionItem;
-import xyz.zimuju.library.NathanielDialog;
 
 
 /**
